@@ -1,4 +1,3 @@
-
 namespace Stock.WebApi
 {
     public class Program
