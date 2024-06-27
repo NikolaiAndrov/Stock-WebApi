@@ -35,8 +35,7 @@
         public decimal LastDiv { get; set; }
 
         [Required]
-        [Column(TypeName = DecimalColumnType)]
-        public decimal MarketCap { get; set; }
+        public long MarketCap { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
     }
