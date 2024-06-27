@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using static Common.EntityValidationConstants.StockValidation;
 
     public class Stock
     {
@@ -14,22 +15,27 @@
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(SymbolMaxLength)]
         public string Symbol { get; set; } = string.Empty;
 
         [Required]
+        [MaxLength(CompanyNameMaxLength)]
         public string CompanyName { get; set; } = string.Empty;
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Purcase { get; set; }
-
-        [Required]
-        public decimal LastDiv { get; set; }
-
-        [Required]
+        [MaxLength(IndustryMaxLength)]
         public string Industry { get; set; } = string.Empty;
 
         [Required]
+        [Column(TypeName = DecimalColumnType)]
+        public decimal Purcase { get; set; }
+
+        [Required]
+        [Column(TypeName = DecimalColumnType)]
+        public decimal LastDiv { get; set; }
+
+        [Required]
+        [Column(TypeName = DecimalColumnType)]
         public decimal MarketCap { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
