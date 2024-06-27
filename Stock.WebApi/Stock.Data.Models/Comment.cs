@@ -6,6 +6,11 @@
 
     public class Comment
     {
+        public Comment()
+        {
+            this.CreatedOn = DateTime.UtcNow;    
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -16,6 +21,8 @@
         [Required]
         [MaxLength(ContentMaxLength)]
         public string Content { get; set; } = string.Empty;
+
+        public DateTime CreatedOn { get; set; }
 
         [Required]
         public int StockId { get; set; }
