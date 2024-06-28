@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repository\Interfaces\**" />
+    <Compile Remove="Repository\Models\**" />
+    <EmbeddedResource Remove="Repository\Interfaces\**" />
+    <EmbeddedResource Remove="Repository\Models\**" />
+    <None Remove="Repository\Interfaces\**" />
+    <None Remove="Repository\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Stock.Data.Models\Stock.Data.Models.csproj" />
     <ProjectReference Include="..\Stock.Data\Stock.Data.csproj" />
   </ItemGroup>
