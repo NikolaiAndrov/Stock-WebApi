@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Stock.Data.Models\Stock.Data.Models.csproj" />
-    <ProjectReference Include="..\Stock.WebApi.DtoModels\Stock.WebApi.DtoModels.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -5,6 +5,7 @@
     using Microsoft.EntityFrameworkCore;
     using Stock.Data;
     using Stock.Data.Models;
+    using static Infrastructure.Extensions.StockMappers;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -20,7 +21,8 @@
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            ICollection<Stock> stocks = await this.dbContext.Stocks
+            var stocks = await this.dbContext.Stocks
+                .Select(s => s.ToStockDto())
                 .ToListAsync();
 
             return this.Ok(stocks);
@@ -29,8 +31,10 @@
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            Stock? stock = await this.dbContext.Stocks
-                .FindAsync(id);
+            var stock = await this.dbContext.Stocks
+                .Where(s => s.Id == id)
+                .Select(s => s.ToStockDto())
+                .FirstOrDefaultAsync();
 
             if (stock == null)
             {
