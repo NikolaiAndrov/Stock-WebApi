@@ -20,9 +20,24 @@
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            ICollection<Stock> stocks = await this.dbContext.Stocks.ToListAsync();
+            ICollection<Stock> stocks = await this.dbContext.Stocks
+                .ToListAsync();
 
             return this.Ok(stocks);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            Stock? stock = await this.dbContext.Stocks
+                .FindAsync(id);
+
+            if (stock == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(stock);
         }
     }
 }
