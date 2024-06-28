@@ -1,10 +1,8 @@
 ﻿namespace Stock.WebApi.Controllers
 {
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Stock.Data;
-    using Stock.Data.Models;
     using static Infrastructure.Extensions.StockMappers;
 
     [Route("api/[controller]")]

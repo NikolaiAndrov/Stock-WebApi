@@ -2,6 +2,7 @@ namespace Stock.WebApi
 {
     using Microsoft.EntityFrameworkCore;
     using Stock.Data;
+    using Stock.Data.Common.Repository;
 
     public class Program
     {
@@ -17,6 +18,8 @@ namespace Stock.WebApi
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IRepository, Repository>();
 
             var app = builder.Build();
 

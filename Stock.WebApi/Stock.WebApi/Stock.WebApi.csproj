@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Stock.Data.Common\Stock.Data.Common.csproj" />
     <ProjectReference Include="..\Stock.Data\Stock.Data.csproj" />
+    <ProjectReference Include="..\Stock.Services\Stock.Services.csproj" />
     <ProjectReference Include="..\Stock.WebApi.Infrastructure\Stock.WebApi.Infrastructure.csproj" />
   </ItemGroup>
 
