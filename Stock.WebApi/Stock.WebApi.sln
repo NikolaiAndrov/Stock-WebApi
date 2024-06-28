@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stock.Common", "Stock.Commo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.WebApi.DtoModels", "Stock.WebApi.DtoModels\Stock.WebApi.DtoModels.csproj", "{0AAEF80A-0D13-4270-A441-F829B3CFCD35}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.WebApi.Infrastructure", "Stock.WebApi.Infrastructure\Stock.WebApi.Infrastructure.csproj", "{DBD1A3C5-7AE7-416A-94EF-5D3A3F051BB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0AAEF80A-0D13-4270-A441-F829B3CFCD35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AAEF80A-0D13-4270-A441-F829B3CFCD35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AAEF80A-0D13-4270-A441-F829B3CFCD35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBD1A3C5-7AE7-416A-94EF-5D3A3F051BB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD1A3C5-7AE7-416A-94EF-5D3A3F051BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD1A3C5-7AE7-416A-94EF-5D3A3F051BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD1A3C5-7AE7-416A-94EF-5D3A3F051BB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{0E817361-356A-4B17-A269-3521C13876F7} = {64177959-7FA9-4EF1-83D7-4BB096A22F20}
 		{83B50C67-98A8-46F8-A6BA-DB57457DB615} = {C14760FD-B4DE-4B6A-B40A-9DF423AD2871}
 		{0AAEF80A-0D13-4270-A441-F829B3CFCD35} = {48986738-A9EC-4768-88CC-EF68C5C06BB7}
+		{DBD1A3C5-7AE7-416A-94EF-5D3A3F051BB8} = {48986738-A9EC-4768-88CC-EF68C5C06BB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F8F1A59-839E-4F88-A0B9-0A9E8393F212}
