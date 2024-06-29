@@ -29,5 +29,8 @@
 
         public async Task<int> SaveChangesAsync()
             => await this.dbContext.SaveChangesAsync();
+
+        public async Task<T?> GetByIdAsync<T>(object id) where T : class
+            => await this.DbSet<T>().FindAsync(id);
     }
 }
