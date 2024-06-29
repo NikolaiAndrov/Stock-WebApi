@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\Stock.Data.Common\Stock.Data.Common.csproj" />
+    <ProjectReference Include="..\Stock.WebApi.DtoModels\Stock.WebApi.DtoModels.csproj" />
+    <ProjectReference Include="..\Stock.WebApi.Infrastructure\Stock.WebApi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

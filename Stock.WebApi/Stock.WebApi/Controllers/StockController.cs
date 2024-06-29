@@ -1,27 +1,33 @@
 ﻿namespace Stock.WebApi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using Stock.Data;
-    using static Infrastructure.Extensions.StockMappers;
+    using Stock.Services.Interfaces;
+    using Stock.WebApi.DtoModels.Stock;
 
     [Route("api/[controller]")]
     [ApiController]
     public class StockController : ControllerBase
     {
-        private readonly StockDbContext dbContext;
+        private readonly IStockService stockService;
 
-        public StockController(StockDbContext dbContext)
+        public StockController(IStockService stockService)
         {
-            this.dbContext = dbContext;
+            this.stockService = stockService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var stocks = await this.dbContext.Stocks
-                .Select(s => s.ToStockDto())
-                .ToListAsync();
+            IEnumerable<StockDto> stocks;
+
+            try
+            {
+                stocks = await this.stockService.GetAllStocksAsync();
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
 
             return this.Ok(stocks);
         }
@@ -29,17 +35,7 @@
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var stock = await this.dbContext.Stocks
-                .Where(s => s.Id == id)
-                .Select(s => s.ToStockDto())
-                .FirstOrDefaultAsync();
-
-            if (stock == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.Ok(stock);
+            throw new NotImplementedException();
         }
     }
 }

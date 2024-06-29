@@ -1,8 +1,10 @@
 namespace Stock.WebApi
 {
     using Microsoft.EntityFrameworkCore;
-    using Stock.Data;
-    using Stock.Data.Common.Repository;
+    using Data;
+    using Data.Common.Repository;
+    using Services;
+    using Services.Interfaces;
 
     public class Program
     {
@@ -20,6 +22,7 @@ namespace Stock.WebApi
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<IRepository, Repository>();
+            builder.Services.AddScoped<IStockService, StockService>();
 
             var app = builder.Build();
 
