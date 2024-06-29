@@ -35,7 +35,23 @@
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            throw new NotImplementedException();
+            StockDto? stockDto = null;
+
+            try
+            {
+                stockDto = await this.stockService.GetStockByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+
+            if (stockDto == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(stockDto);
         }
     }
 }

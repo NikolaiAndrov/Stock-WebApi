@@ -5,5 +5,7 @@
     public interface IStockService
     {
         Task<IEnumerable<StockDto>> GetAllStocksAsync();
+
+        Task<StockDto?> GetStockByIdAsync(int id);
     }
 }

@@ -26,5 +26,19 @@
 
             return stocks;
         }
+
+        public async Task<StockDto?> GetStockByIdAsync(int id)
+        {
+            Stock? stock = await this.repository.GetByIdAsync<Stock>(id);
+
+            if (stock == null)
+            {
+                return null;
+            }
+
+            StockDto stockDto = stock.ToStockDto();
+
+            return stockDto;
+        }
     }
 }
