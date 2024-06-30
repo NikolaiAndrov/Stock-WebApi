@@ -1,7 +1,6 @@
 ﻿namespace Stock.WebApi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Identity.Client;
     using Stock.Services.Interfaces;
     using Stock.WebApi.DtoModels.Stock;
 
@@ -98,6 +97,27 @@
             }
 
             return this.Ok(stockDto);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            if (await this.stockService.IsStockExistingByIdAsync(id) == false)
+            {
+                return this.NotFound();
+            }
+
+            try
+            {
+                await this.stockService.DeleteAsync(id);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+
+            return this.NoContent();
         }
     }
 }

@@ -28,6 +28,13 @@
             return stock.ToStockDto();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            Stock? stock = await this.repository.GetByIdAsync<Stock>(id);
+            this.repository.Delete<Stock>(stock!); 
+            await this.repository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<StockDto>> GetAllStocksAsync()
         {
             IEnumerable<StockDto> stocks = await this.repository.AllReadonly<Stock>()
@@ -49,6 +56,14 @@
             StockDto stockDto = stock.ToStockDto();
 
             return stockDto;
+        }
+
+        public async Task<bool> IsStockExistingByIdAsync(int id)
+        {
+            bool isExisting = await this.repository.AllReadonly<Stock>()
+                .AnyAsync(s => s.Id == id);
+
+            return isExisting;
         }
 
         public async Task<StockDto?> UpdateAsync(int id, UpdateStockDto updateStockDto)

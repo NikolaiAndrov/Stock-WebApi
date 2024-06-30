@@ -11,5 +11,9 @@
         Task<StockDto> CreateStockAsync(CreateStockDto createStockDto);
 
         Task<StockDto?> UpdateAsync(int id, UpdateStockDto updateStockDto);
+
+        Task<bool> IsStockExistingByIdAsync(int id);
+
+        Task DeleteAsync(int id);
     }
 }
