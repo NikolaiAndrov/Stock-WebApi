@@ -20,5 +20,20 @@
 
             return stockDto;
         }
+
+        public static Stock ToStock(this CreateStockDto createStockDto)
+        {
+            Stock stock = new Stock
+            {
+                Symbol = createStockDto.Symbol,
+                CompanyName = createStockDto.CompanyName,
+                Industry = createStockDto.Industry,
+                Purcase = createStockDto.Purcase,
+                LastDiv = createStockDto.LastDiv,
+                MarketCap = createStockDto.MarketCap
+            };
+
+            return stock;
+        }
     }
 }
