@@ -50,5 +50,26 @@
 
             return stockDto;
         }
+
+        public async Task<StockDto?> UpdateAsync(int id, UpdateStockDto updateStockDto)
+        {
+            Stock? stock = await this.repository.GetByIdAsync<Stock>(id);
+
+            if(stock == null)
+            {
+                return null;
+            }
+
+            stock.Symbol = updateStockDto.Symbol;
+            stock.CompanyName = updateStockDto.CompanyName;
+            stock.Industry = updateStockDto.Industry;
+            stock.Purcase = updateStockDto.Purchase;
+            stock.LastDiv = updateStockDto.LastDiv;
+            stock.MarketCap = updateStockDto.MarketCap;
+
+            await this.repository.SaveChangesAsync();
+
+            return stock.ToStockDto();
+        }
     }
 }

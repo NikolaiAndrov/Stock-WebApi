@@ -1,6 +1,7 @@
 ﻿namespace Stock.WebApi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Identity.Client;
     using Stock.Services.Interfaces;
     using Stock.WebApi.DtoModels.Stock;
 
@@ -74,6 +75,29 @@
             }
 
             return this.CreatedAtAction(nameof(this.GetById), new { id }, stockDto);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockDto updateStockDto)
+        {
+            StockDto? stockDto = null;
+
+            try
+            {
+                stockDto = await this.stockService.UpdateAsync(id, updateStockDto);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+
+            if (stockDto == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(stockDto);
         }
     }
 }
