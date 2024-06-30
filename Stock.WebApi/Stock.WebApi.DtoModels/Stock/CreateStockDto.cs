@@ -28,5 +28,6 @@
         [Required]
         [Range(MarketCapMinValue, MarketCapMaxValue)]
         public long MarketCap { get; set; }
+
     }
 }
