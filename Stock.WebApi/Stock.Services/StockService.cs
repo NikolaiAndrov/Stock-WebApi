@@ -18,6 +18,16 @@
             this.repository = repository;
         }
 
+        public async Task<int> CreateStockReturnIdAsync(CreateStockDto createStockDto)
+        {
+            Stock stock = createStockDto.ToStock();
+
+            await this.repository.AddAsync<Stock>(stock);
+            await this.repository.SaveChangesAsync();
+
+            return stock.Id;
+        }
+
         public async Task<IEnumerable<StockDto>> GetAllStocksAsync()
         {
             IEnumerable<StockDto> stocks = await this.repository.AllReadonly<Stock>()

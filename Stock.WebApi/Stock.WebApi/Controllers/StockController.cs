@@ -57,7 +57,23 @@
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateStockDto stockDto)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
 
+            int id;
+
+            try
+            {
+                id = await this.stockService.CreateStockReturnIdAsync(stockDto);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+
+            return this.CreatedAtAction(nameof(this.GetById), new { id }, stockDto);
         }
     }
 }

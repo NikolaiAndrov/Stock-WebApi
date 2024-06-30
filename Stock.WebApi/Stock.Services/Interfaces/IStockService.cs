@@ -7,5 +7,7 @@
         Task<IEnumerable<StockDto>> GetAllStocksAsync();
 
         Task<StockDto?> GetStockByIdAsync(int id);
+
+        Task<int> CreateStockReturnIdAsync(CreateStockDto createStockDto);
     }
 }

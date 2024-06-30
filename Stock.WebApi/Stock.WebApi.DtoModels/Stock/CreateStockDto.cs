@@ -17,16 +17,10 @@
         [StringLength(IndustryMaxLength, MinimumLength = IndustryMinLength)] 
         public string Industry { get; set; } = string.Empty;
 
-        [Required]
-        [Range(typeof(decimal), PurchaseMinValue, PurchaseMaxValue]
         public decimal Purcase { get; set; }
 
-        [Required]
-        [Range(typeof(decimal), LastDivMinValue, LastDivMaxValue)]
         public decimal LastDiv { get; set; }
 
-        [Required]
-        [Range(MarketCapMinValue, MarketCapMaxValue)]
         public long MarketCap { get; set; }
 
     }
