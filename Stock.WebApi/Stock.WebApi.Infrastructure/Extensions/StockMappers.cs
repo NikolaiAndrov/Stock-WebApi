@@ -13,7 +13,7 @@
                 Symbol = stock.Symbol,
                 CompanyName = stock.CompanyName,
                 Industry = stock.Industry,
-                Purcase = stock.Purcase,
+                Purchase = stock.Purcase,
                 LastDiv = stock.LastDiv,
                 MarketCap = stock.MarketCap
             };
@@ -28,7 +28,7 @@
                 Symbol = createStockDto.Symbol,
                 CompanyName = createStockDto.CompanyName,
                 Industry = createStockDto.Industry,
-                Purcase = createStockDto.Purcase,
+                Purcase = createStockDto.Purchase,
                 LastDiv = createStockDto.LastDiv,
                 MarketCap = createStockDto.MarketCap
             };

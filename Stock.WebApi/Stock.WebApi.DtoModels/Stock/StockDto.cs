@@ -10,7 +10,7 @@
 
         public string Industry { get; set; } = string.Empty;
 
-        public decimal Purcase { get; set; }
+        public decimal Purchase { get; set; }
 
         public decimal LastDiv { get; set; }
 
