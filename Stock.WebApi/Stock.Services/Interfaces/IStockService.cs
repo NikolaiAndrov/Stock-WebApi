@@ -8,7 +8,7 @@
 
         Task<StockDto?> GetStockByIdAsync(int id);
 
-        Task<int> CreateStockReturnIdAsync(CreateStockDto createStockDto);
+        Task<StockDto> CreateStockAsync(CreateStockDto createStockDto);
 
         Task<StockDto?> UpdateAsync(int id, UpdateStockDto updateStockDto);
     }
