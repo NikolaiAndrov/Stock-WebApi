@@ -21,7 +21,6 @@
             return stockDto;
         }
 
-
         public static Stock ToStock(this CreateStockDto createStockDto)
         {
             Stock stock = new Stock
