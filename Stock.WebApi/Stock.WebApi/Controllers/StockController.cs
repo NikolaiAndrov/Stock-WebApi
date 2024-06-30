@@ -53,5 +53,11 @@
 
             return this.Ok(stockDto);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateStockDto stockDto)
+        {
+
+        }
     }
 }
