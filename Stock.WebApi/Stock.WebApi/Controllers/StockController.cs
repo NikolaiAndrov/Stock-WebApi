@@ -36,7 +36,7 @@
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            StockDto? stockDto = null;
+            StockDto? stockDto;
 
             try
             {
@@ -81,7 +81,7 @@
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockDto updateStockDto)
         {
-            StockDto? stockDto = null;
+            StockDto? stockDto;
 
             try
             {
