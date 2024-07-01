@@ -23,6 +23,7 @@ namespace Stock.WebApi
 
             builder.Services.AddScoped<IRepository, Repository>();
             builder.Services.AddScoped<IStockService, StockService>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
 
             var app = builder.Build();
 
