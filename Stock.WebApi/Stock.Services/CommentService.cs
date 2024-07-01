@@ -1,13 +1,13 @@
 ﻿namespace Stock.Services
 {
-    using Interfaces;
-    using Microsoft.EntityFrameworkCore;
-    using Stock.Data.Common.Repository;
-    using Stock.Data.Models;
-    using Stock.WebApi.DtoModels.Comment;
-    using Stock.WebApi.Infrastructure.Extensions;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Interfaces;
+    using Microsoft.EntityFrameworkCore;
+    using Data.Common.Repository;
+    using Data.Models;
+    using WebApi.DtoModels.Comment;
+    using WebApi.Infrastructure.Extensions;
 
     public class CommentService : ICommentService
     {

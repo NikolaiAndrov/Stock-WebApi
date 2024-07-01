@@ -1,6 +1,6 @@
 ﻿namespace Stock.Services.Interfaces
 {
-    using Stock.WebApi.DtoModels.Comment;
+    using WebApi.DtoModels.Comment;
 
     public interface ICommentService
     {

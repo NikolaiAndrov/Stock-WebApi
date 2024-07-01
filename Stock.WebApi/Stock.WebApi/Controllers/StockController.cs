@@ -1,8 +1,8 @@
 ﻿namespace Stock.WebApi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Stock.Services.Interfaces;
-    using Stock.WebApi.DtoModels.Stock;
+    using Services.Interfaces;
+    using DtoModels.Stock;
 
     [Route("api/[controller]")]
     [ApiController]

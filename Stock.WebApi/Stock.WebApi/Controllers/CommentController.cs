@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Stock.Services.Interfaces;
-    using Stock.WebApi.DtoModels.Comment;
+    using DtoModels.Comment;
 
     [Route("api/[controller]")]
     [ApiController]
