@@ -47,7 +47,10 @@
 
         public async Task<StockDto?> GetStockByIdAsync(int id)
         {
-            Stock? stock = await this.repository.GetByIdAsync<Stock>(id);
+            Stock? stock = await this.repository.AllReadonly<Stock>()
+                .Where(s => s.Id == id)
+                .Include(s => s.Comments)
+                .FirstOrDefaultAsync();
 
             if (stock == null)
             {
