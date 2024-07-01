@@ -31,5 +31,27 @@
 
             return Ok(comments);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            CommentDto? commentDto;
+
+            try
+            {
+                commentDto = await this.commentService.GetByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+
+            if (commentDto == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(commentDto);
+        }
     }
 }

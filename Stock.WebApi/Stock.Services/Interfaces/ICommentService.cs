@@ -5,5 +5,7 @@
     public interface ICommentService
     {
         Task<IEnumerable<CommentDto>> GetAllAsync();
+
+        Task<CommentDto?> GetByIdAsync(int id);
     }
 }

@@ -26,5 +26,17 @@
 
             return comments;
         }
+
+        public async Task<CommentDto?> GetByIdAsync(int id)
+        {
+            Comment? comment = await this.repository.GetByIdAsync<Comment>(id);
+
+            if (comment == null)
+            {
+                return null;
+            }
+
+            return comment.ToCommentDto();
+        }
     }
 }
