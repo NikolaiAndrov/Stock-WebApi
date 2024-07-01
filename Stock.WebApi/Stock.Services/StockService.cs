@@ -38,6 +38,7 @@
         public async Task<IEnumerable<StockDto>> GetAllStocksAsync()
         {
             IEnumerable<StockDto> stocks = await this.repository.AllReadonly<Stock>()
+                .Include(s => s.Comments)
                 .Select(s => s.ToStockDto())
                 .ToListAsync();
 

@@ -15,7 +15,8 @@
                 Industry = stock.Industry,
                 Purchase = stock.Purcase,
                 LastDiv = stock.LastDiv,
-                MarketCap = stock.MarketCap
+                MarketCap = stock.MarketCap,
+                Comments = stock.Comments.Select(c => c.ToCommentDto()).ToList()
             };
 
             return stockDto;
