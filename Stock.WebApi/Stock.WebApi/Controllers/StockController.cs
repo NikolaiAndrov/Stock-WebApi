@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
     using DtoModels.Stock;
+    using static Common.ApplicationErrorMessages;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -26,7 +27,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             return this.Ok(stocks);
@@ -43,7 +44,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             if (stockDto == null)
@@ -70,7 +71,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             return this.CreatedAtAction(nameof(this.GetById), new { id = stockDto.Id }, stockDto);
@@ -88,7 +89,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             if (stockDto == null)
@@ -114,7 +115,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             return this.NoContent();
