@@ -30,7 +30,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             return Ok(comments);
@@ -47,7 +47,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             if (commentDto == null)
@@ -79,7 +79,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(UnexpectedErrorMessage);
             }
 
             return this.CreatedAtAction(nameof(this.GetById), new { id = commentDto.Id }, commentDto);
