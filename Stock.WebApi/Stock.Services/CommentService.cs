@@ -18,6 +18,16 @@
             this.repository = repository;
         }
 
+        public async Task<CommentDto> CreateCommentAsync(CreateCommentDto createCommentDto, int stockId)
+        {
+            Comment comment = createCommentDto.ToComment(stockId);
+
+            await this.repository.AddAsync<Comment>(comment);
+            await this.repository.SaveChangesAsync();
+
+            return comment.ToCommentDto();
+        }
+
         public async Task<IEnumerable<CommentDto>> GetAllAsync()
         {
             IEnumerable<CommentDto> comments = await this.repository.AllReadonly<Comment>()

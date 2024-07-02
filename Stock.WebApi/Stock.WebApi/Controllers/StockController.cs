@@ -73,7 +73,7 @@
                 return this.BadRequest();
             }
 
-            return this.CreatedAtAction(nameof(this.GetById), new { stockDto.Id }, stockDto);
+            return this.CreatedAtAction(nameof(this.GetById), new { id = stockDto.Id }, stockDto);
         }
 
         [HttpPut]

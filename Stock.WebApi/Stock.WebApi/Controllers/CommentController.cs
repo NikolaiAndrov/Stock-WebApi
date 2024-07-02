@@ -3,16 +3,20 @@
     using Microsoft.AspNetCore.Mvc;
     using Stock.Services.Interfaces;
     using DtoModels.Comment;
+    using static Common.ApplicationErrorMessages;
 
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
         private readonly ICommentService commentService;
+        private readonly IStockService stockService;
 
-        public CommentController(ICommentService commentService)
+        public CommentController(ICommentService commentService, IStockService stockService)
         {
             this.commentService = commentService;
+            this.stockService = stockService;
+
         }
 
         [HttpGet]
@@ -52,6 +56,33 @@
             }
 
             return this.Ok(commentDto);
+        }
+
+        [HttpPost("{stockId}")]
+        public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentDto createCommentDto)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            if (await this.stockService.IsStockExistingByIdAsync(stockId) == false)
+            {
+                return this.BadRequest(StockNotExistingMessage);
+            }
+
+            CommentDto commentDto;
+
+            try
+            {
+                commentDto = await this.commentService.CreateCommentAsync(createCommentDto, stockId);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+
+            return this.CreatedAtAction(nameof(this.GetById), new { id = commentDto.Id }, commentDto);
         }
     }
 }
