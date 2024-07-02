@@ -48,5 +48,21 @@
 
             return comment.ToCommentDto();
         }
+
+        public async Task<CommentDto?> UpdateCommentAsync(int id, UpdateCommentDto updateCommentDto)
+        {
+            Comment? comment = await this.repository.GetByIdAsync<Comment>(id);
+
+            if(comment == null)
+            {
+                return null;
+            }
+
+            comment.Title = updateCommentDto.Title;
+            comment.Content = updateCommentDto.Content;
+
+            await this.repository.SaveChangesAsync();
+            return comment.ToCommentDto();
+        }
     }
 }

@@ -84,5 +84,33 @@
 
             return this.CreatedAtAction(nameof(this.GetById), new { id = commentDto.Id }, commentDto);
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, UpdateCommentDto updateCommentDto)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            CommentDto? commentDto;
+
+            try
+            {
+                commentDto = await this.commentService.UpdateCommentAsync(id, updateCommentDto);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest(UnexpectedErrorMessage);
+            }
+
+            if (commentDto == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(commentDto);
+        }
     }
 }
