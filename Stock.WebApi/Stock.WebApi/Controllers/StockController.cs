@@ -33,7 +33,7 @@
             return this.Ok(stocks);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             StockDto? stockDto;
@@ -78,7 +78,7 @@
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockDto updateStockDto)
         {
             if (!this.ModelState.IsValid)
@@ -106,7 +106,7 @@
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             if (await this.stockService.IsStockExistingByIdAsync(id) == false)
