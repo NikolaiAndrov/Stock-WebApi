@@ -4,7 +4,7 @@
 
     public interface IStockService
     {
-        Task<IEnumerable<StockDto>> GetAllStocksAsync();
+        Task<IEnumerable<StockDto>> GetAllStocksAsync(StockQueryModel stockQueryModel);
 
         Task<StockDto?> GetStockByIdAsync(int id);
 

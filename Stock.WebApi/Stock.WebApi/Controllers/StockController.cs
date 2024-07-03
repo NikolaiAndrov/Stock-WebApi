@@ -17,13 +17,13 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] StockQueryModel stockQueryModel)
         {
             IEnumerable<StockDto> stocks;
 
             try
             {
-                stocks = await this.stockService.GetAllStocksAsync();
+                stocks = await this.stockService.GetAllStocksAsync(stockQueryModel);
             }
             catch (Exception)
             {

@@ -35,10 +35,37 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<StockDto>> GetAllStocksAsync()
+        public async Task<IEnumerable<StockDto>> GetAllStocksAsync(StockQueryModel stockQueryModel)
         {
-            IEnumerable<StockDto> stocks = await this.repository.AllReadonly<Stock>()
+            IQueryable<Stock> stocksQuery = this.repository.AllReadonly<Stock>()
                 .Include(s => s.Comments)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(stockQueryModel.Symbol))
+            {
+                string wildCard = $"%{stockQueryModel.Symbol.ToLower()}%";
+
+                stocksQuery = stocksQuery
+                    .Where(s => EF.Functions.Like(s.Symbol, wildCard));
+            }
+
+            if (!string.IsNullOrWhiteSpace(stockQueryModel.CompanyName))
+            {
+                string wildCard = $"%{stockQueryModel.CompanyName.ToLower()}%";
+
+                stocksQuery = stocksQuery
+                    .Where(s => EF.Functions.Like(s.CompanyName, wildCard));
+            }
+
+            if (!string.IsNullOrWhiteSpace(stockQueryModel.Industry))
+            {
+                string wildCard = $"%{stockQueryModel.Industry.ToLower()}%";
+
+                stocksQuery = stocksQuery
+                    .Where(s => EF.Functions.Like(s.Industry, wildCard));
+            }
+
+            IEnumerable<StockDto> stocks = await stocksQuery
                 .Select(s => s.ToStockDto())
                 .ToListAsync();
 
