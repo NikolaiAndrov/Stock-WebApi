@@ -36,7 +36,7 @@
             return Ok(comments);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             CommentDto? commentDto;
@@ -58,7 +58,7 @@
             return this.Ok(commentDto);
         }
 
-        [HttpPost("{stockId}")]
+        [HttpPost("{stockId:int}")]
         public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentDto createCommentDto)
         {
             if (!this.ModelState.IsValid)
@@ -86,7 +86,7 @@
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, UpdateCommentDto updateCommentDto)
         {
             if (!this.ModelState.IsValid)
@@ -114,7 +114,7 @@
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (await this.commentService.IsCommentExistingByIdAsync(id) == false)
