@@ -14,6 +14,15 @@
 
             public const int IndustryMinLength = 2;
             public const int IndustryMaxLength = 100;
+
+            public const string PurchaseMinValue = "0.01";
+            public const string PurchaseMaxValue = "50000000";
+
+            public const string LastDivMinValue = "0.01";
+            public const string LastDivMaxValue = "100";
+
+            public const long MarketCapMinValue = 1;
+            public const long MarketCapMaxValue = 50000000;
         }
 
         public static class CommentValidation
