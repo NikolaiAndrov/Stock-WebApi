@@ -112,5 +112,26 @@
 
             return this.Ok(commentDto);
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await this.commentService.IsCommentExistingByIdAsync(id) == false)
+            {
+                return this.NotFound();
+            }
+
+            try
+            {
+                await this.commentService.DeleteAsync(id);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest(UnexpectedErrorMessage);
+            }
+
+            return this.NoContent();
+        }
     }
 }

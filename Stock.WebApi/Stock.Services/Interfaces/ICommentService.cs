@@ -11,5 +11,9 @@
         Task<CommentDto> CreateCommentAsync(CreateCommentDto createCommentDto, int stockId);
 
         Task<CommentDto?> UpdateCommentAsync(int id, UpdateCommentDto updateCommentDto);
+
+        Task DeleteAsync(int id);
+
+        Task<bool> IsCommentExistingByIdAsync(int id);
     }
 }

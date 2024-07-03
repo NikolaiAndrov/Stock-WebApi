@@ -28,6 +28,13 @@
             return comment.ToCommentDto();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            Comment? comment = await this.repository.GetByIdAsync<Comment>(id);
+            this.repository.Delete<Comment>(comment!);
+            await this.repository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<CommentDto>> GetAllAsync()
         {
             IEnumerable<CommentDto> comments = await this.repository.AllReadonly<Comment>()
@@ -47,6 +54,14 @@
             }
 
             return comment.ToCommentDto();
+        }
+
+        public async Task<bool> IsCommentExistingByIdAsync(int id)
+        {
+            bool isExisting = await this.repository.AllReadonly<Comment>()
+                .AnyAsync(c => c.Id == id);
+
+            return isExisting;
         }
 
         public async Task<CommentDto?> UpdateCommentAsync(int id, UpdateCommentDto updateCommentDto)
