@@ -1,9 +1,10 @@
 ﻿namespace Stock.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Stock.Data.Models;
 
-    public class StockDbContext : DbContext
+    public class StockDbContext : IdentityDbContext<ApplicationUser>
     {
         public StockDbContext(DbContextOptions options)
             : base(options) 

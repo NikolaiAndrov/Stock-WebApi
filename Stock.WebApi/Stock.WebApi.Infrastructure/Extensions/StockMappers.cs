@@ -13,7 +13,7 @@
                 Symbol = stock.Symbol,
                 CompanyName = stock.CompanyName,
                 Industry = stock.Industry,
-                Purchase = stock.Purcase,
+                Purchase = stock.Purchase,
                 LastDiv = stock.LastDiv,
                 MarketCap = stock.MarketCap,
                 Comments = stock.Comments.Select(c => c.ToCommentDto()).ToList()
@@ -29,7 +29,7 @@
                 Symbol = createStockDto.Symbol,
                 CompanyName = createStockDto.CompanyName,
                 Industry = createStockDto.Industry,
-                Purcase = createStockDto.Purchase,
+                Purchase = createStockDto.Purchase,
                 LastDiv = createStockDto.LastDiv,
                 MarketCap = createStockDto.MarketCap
             };

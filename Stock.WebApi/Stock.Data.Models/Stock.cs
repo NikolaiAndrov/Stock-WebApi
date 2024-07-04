@@ -28,7 +28,7 @@
 
         [Required]
         [Column(TypeName = DecimalColumnType)]
-        public decimal Purcase { get; set; }
+        public decimal Purchase { get; set; }
 
         [Required]
         [Column(TypeName = DecimalColumnType)]

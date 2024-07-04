@@ -73,7 +73,7 @@
                 }
                 else if (stockQueryModel.SortBy.Equals("Purchase", StringComparison.OrdinalIgnoreCase))
                 {
-                    stocksQuery = stockQueryModel.IsDescending ? stocksQuery.OrderByDescending(s => s.Purcase) : stocksQuery.OrderBy(s => s.Purcase);
+                    stocksQuery = stockQueryModel.IsDescending ? stocksQuery.OrderByDescending(s => s.Purchase) : stocksQuery.OrderBy(s => s.Purchase);
                 }
                 else if (stockQueryModel.SortBy.Equals("Last Divident", StringComparison.OrdinalIgnoreCase))
                 {
@@ -127,7 +127,7 @@
             stock.Symbol = updateStockDto.Symbol;
             stock.CompanyName = updateStockDto.CompanyName;
             stock.Industry = updateStockDto.Industry;
-            stock.Purcase = updateStockDto.Purchase;
+            stock.Purchase = updateStockDto.Purchase;
             stock.LastDiv = updateStockDto.LastDiv;
             stock.MarketCap = updateStockDto.MarketCap;
 
