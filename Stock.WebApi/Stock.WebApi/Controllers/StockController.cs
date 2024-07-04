@@ -19,6 +19,11 @@
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] StockQueryModel stockQueryModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
             IEnumerable<StockDto> stocks;
 
             try

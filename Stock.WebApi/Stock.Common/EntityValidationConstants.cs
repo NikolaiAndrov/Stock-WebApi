@@ -23,6 +23,12 @@
 
             public const long MarketCapMinValue = 1;
             public const long MarketCapMaxValue = 50000000;
+
+            public const int PageMinValue = 1;
+            public const int PageMaxValue = int.MaxValue;
+
+            public const int ItemsPerPageMinValue = 1;
+            public const int ItemsPerPageMaxValue = 100;
         }
 
         public static class CommentValidation

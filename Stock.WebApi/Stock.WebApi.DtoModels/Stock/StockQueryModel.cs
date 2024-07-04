@@ -1,5 +1,9 @@
 ﻿namespace Stock.WebApi.DtoModels.Stock
 {
+    using System.ComponentModel.DataAnnotations;
+    using static Common.EntityValidationConstants.StockValidation;
+    using static Common.ApplicationErrorMessages;
+
     public class StockQueryModel
     {
         public StockQueryModel()
@@ -18,8 +22,10 @@
 
         public bool IsDescending { get; set; }
 
+        [Range(PageMinValue, PageMaxValue)]
         public int Page { get; set; }
 
+        [Range(ItemsPerPageMinValue, ItemsPerPageMaxValue)]
         public int ItemsPerPage { get; set; }
     }
 }
