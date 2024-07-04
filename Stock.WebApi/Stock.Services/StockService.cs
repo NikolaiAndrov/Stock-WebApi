@@ -82,6 +82,8 @@
             }
 
             IEnumerable<StockDto> stocks = await stocksQuery
+                .Skip((stockQueryModel.Page - 1) * stockQueryModel.ItemsPerPage)
+                .Take(stockQueryModel.ItemsPerPage)
                 .Select(s => s.ToStockDto())
                 .ToListAsync();
 
