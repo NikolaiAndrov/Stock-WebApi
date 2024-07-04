@@ -2,7 +2,6 @@
 {
     using System.ComponentModel.DataAnnotations;
     using static Common.EntityValidationConstants.StockValidation;
-    using static Common.ApplicationErrorMessages;
 
     public class StockQueryModel
     {
