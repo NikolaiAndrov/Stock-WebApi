@@ -1,7 +1,7 @@
 ﻿namespace Stock.WebApi.Infrastructure.Extensions
 {
-    using Stock.WebApi.DtoModels.Stock;
-    using Stock.Data.Models;
+    using DtoModels.Stock;
+    using Data.Models;
 
     public static class StockMappers
     {

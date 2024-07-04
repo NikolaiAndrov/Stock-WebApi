@@ -1,7 +1,7 @@
 ﻿namespace Stock.WebApi.Infrastructure.Extensions
 {
-    using Stock.Data.Models;
-    using Stock.WebApi.DtoModels.Comment;
+    using Data.Models;
+    using DtoModels.Comment;
 
     public static class CommentMappers
     {
