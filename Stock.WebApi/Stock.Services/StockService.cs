@@ -65,6 +65,22 @@
                     .Where(s => EF.Functions.Like(s.Industry, wildCard));
             }
 
+            if (!string.IsNullOrWhiteSpace(stockQueryModel.SortBy))
+            {
+                if (stockQueryModel.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocksQuery = stockQueryModel.IsDescending ? stocksQuery.OrderByDescending(s => s.Symbol) : stocksQuery.OrderBy(s => s.Symbol);
+                }
+                else if (stockQueryModel.SortBy.Equals("Purchase", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocksQuery = stockQueryModel.IsDescending ? stocksQuery.OrderByDescending(s => s.Purcase) : stocksQuery.OrderBy(s => s.Purcase);
+                }
+                else if (stockQueryModel.SortBy.Equals("Last Divident", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocksQuery = stockQueryModel.IsDescending ? stocksQuery.OrderByDescending(s => s.LastDiv) : stocksQuery.OrderBy(s => s.LastDiv);
+                }
+            }
+
             IEnumerable<StockDto> stocks = await stocksQuery
                 .Select(s => s.ToStockDto())
                 .ToListAsync();
