@@ -39,5 +39,14 @@
             public const int ContentMinLength = 5;
             public const int ContentMaxLength = 250;
         }
+
+        public static class UserValidation
+        {
+            public const int UserNameMinLength = 3;
+            public const int UserNameMaxLength = 25;
+
+            public const int PasswordMinLength = 5;
+            public const int PasswordMaxLength = 25;
+        }
     }
 }
