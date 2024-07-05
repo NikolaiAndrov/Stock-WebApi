@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Stock.Data.Models;
     using Stock.WebApi.DtoModels.User;
-    using static Common.ApplicationErrorMessages;
+    using static Common.ApplicationMessages;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -62,7 +62,7 @@
                     return this.BadRequest(this.ModelState);
                 }
 
-                return this.Ok("User created");
+                return this.Ok(UserCreatedMessage);
             }
             catch (Exception)
             {

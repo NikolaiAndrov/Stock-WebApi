@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Stock.Services.Interfaces;
     using DtoModels.Comment;
-    using static Common.ApplicationErrorMessages;
+    using static Common.ApplicationMessages;
 
     [Route("api/[controller]")]
     [ApiController]
