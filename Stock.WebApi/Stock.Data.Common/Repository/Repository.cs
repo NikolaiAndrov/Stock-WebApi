@@ -1,7 +1,7 @@
 ﻿namespace Stock.Data.Common.Repository
 {
-    using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
 
     public class Repository : IRepository
     {

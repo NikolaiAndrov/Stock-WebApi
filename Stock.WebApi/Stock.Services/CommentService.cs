@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using Interfaces;
     using Data.Common.Repository;
     using Data.Models;
     using WebApi.DtoModels.Comment;
