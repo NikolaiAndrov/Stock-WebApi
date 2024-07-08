@@ -4,7 +4,5 @@
     {
         public const string StockNotExistingMessage = "Stock does not exist!";
         public const string UnexpectedErrorMessage = "Unexpected error occurred while processing your request!";
-
-        public const string UserCreatedMessage = "The user was created successfully!";
     }
 }

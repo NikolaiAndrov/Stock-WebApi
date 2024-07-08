@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Stock.Data.Models;
+    using Stock.Services.Interfaces;
     using Stock.WebApi.DtoModels.User;
     using static Common.ApplicationMessages;
 
@@ -14,11 +15,15 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ITokenService tokenService;
 
-        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public UserController(UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager,
+            ITokenService tokenService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.tokenService = tokenService;
         }
 
         [HttpPost("register")]
@@ -62,7 +67,14 @@
                     return this.BadRequest(this.ModelState);
                 }
 
-                return this.Ok(UserCreatedMessage);
+                NewUserDto newUser = new NewUserDto
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Token = this.tokenService.CreateToken(user)
+                };
+
+                return this.Ok(newUser);
             }
             catch (Exception)
             {
