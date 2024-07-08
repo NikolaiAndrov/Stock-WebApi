@@ -81,5 +81,47 @@
                 return this.BadRequest(UnexpectedErrorMessage);
             }
         }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginUserDto loginDto)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            ApplicationUser? user = await this.userManager.FindByNameAsync(loginDto.UserName);
+
+            if (user == null)
+            {
+                return this.Unauthorized(InvalidUsernameOrPasswordMessage);
+            }
+
+            var result = await this.signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+
+            if (!result.Succeeded)
+            {
+                return this.Unauthorized(InvalidUsernameOrPasswordMessage);
+            }
+
+            NewUserDto userDto;
+
+            try
+            {
+                userDto = new NewUserDto
+                {
+                    UserName = user.UserName!,
+                    Email = user.Email!,
+                    Token = this.tokenService.CreateToken(user)
+                };
+            }
+            catch (Exception)
+            {
+                return this.BadRequest(UnexpectedErrorMessage);
+            }
+            
+            return this.Ok(userDto);
+        }
     }
 }

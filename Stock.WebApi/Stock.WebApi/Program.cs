@@ -10,6 +10,7 @@ namespace Stock.WebApi
     using Services;
     using Services.Interfaces;
     using Data.Models;
+    using Microsoft.OpenApi.Models;
 
     public class Program
     {
@@ -59,10 +60,38 @@ namespace Stock.WebApi
             builder.Services.AddScoped<IRepository, Repository>();
             builder.Services.AddScoped<IStockService, StockService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
-            builder.Services.AddScoped<ITokenService, TokenService>();  
+            builder.Services.AddScoped<ITokenService, TokenService>();
 
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]!));
             builder.Services.AddSingleton(securityKey);
+
+            builder.Services.AddSwaggerGen(option => {
+                option.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Demo API",
+                    Version = "v1"
+                });
+                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                {
+                  new OpenApiSecurityScheme {
+                    Reference = new OpenApiReference {
+                      Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                  },
+                  new string[] {}
+                }
+              });
+            });
 
             var app = builder.Build();
 
