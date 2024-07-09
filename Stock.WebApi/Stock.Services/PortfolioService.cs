@@ -20,6 +20,7 @@
         {
             IEnumerable<StockDto> stockDtos = await this.repository.AllReadonly<Portfolio>()
                 .Where(p => p.ApplicationUserId == userId)
+                .Include(p => p.Stock.Comments)
                 .Select(p => p.Stock.ToStockDto())
                 .ToListAsync();
 
