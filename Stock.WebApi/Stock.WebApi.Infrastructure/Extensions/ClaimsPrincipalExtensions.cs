@@ -4,11 +4,11 @@
 
     public static class ClaimsPrincipalExtensions
     {
-        public static string? GetId(this ClaimsPrincipal user)
+        public static string? GetUsername(this ClaimsPrincipal user)
         {
-            string? id = user.FindFirstValue(ClaimTypes.NameIdentifier);
+            string? username = user.Claims.SingleOrDefault(x => x.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"))?.Value;
 
-            return id;
+            return username;
         }
     }
 }
