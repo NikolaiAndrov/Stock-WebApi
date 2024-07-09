@@ -17,9 +17,16 @@
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Portfolio> Portfolios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Portfolio>(entity =>
+            {
+                entity.HasKey(k => new { k.ApplicationUserId, k.StockId});
+            });
 
             List<IdentityRole> roles = new List<IdentityRole>
             {

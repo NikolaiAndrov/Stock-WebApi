@@ -9,6 +9,7 @@
         public Stock()
         {
             this.Comments = new HashSet<Comment>();
+            this.Portfolio = new HashSet<Portfolio>();
         }
 
         [Key]
@@ -38,5 +39,7 @@
         public long MarketCap { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual ICollection<Portfolio> Portfolio { get; set; }
     }
 }
