@@ -61,6 +61,7 @@ namespace Stock.WebApi
             builder.Services.AddScoped<IStockService, StockService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]!));
             builder.Services.AddSingleton(securityKey);
