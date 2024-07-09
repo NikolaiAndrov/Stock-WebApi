@@ -10,7 +10,6 @@
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -27,7 +26,6 @@
         }
 
         [HttpPost("register")]
-        [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterUserDto registerUserDto)
         {
             try
@@ -83,7 +81,6 @@
         }
 
         [HttpPost("login")]
-        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginUserDto loginDto)
         {
             if (!this.ModelState.IsValid)
