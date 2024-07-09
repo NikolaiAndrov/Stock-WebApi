@@ -1,21 +1,18 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
+﻿
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace Stock.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
-    public partial class AddIdentity : Migration
+    public partial class PortfolioAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Purcase",
-                table: "Stocks",
-                newName: "Purchase");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -53,6 +50,24 @@ namespace Stock.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stocks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Symbol = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Industry = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Purchase = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    LastDiv = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketCap = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stocks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -161,6 +176,61 @@ namespace Stock.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StockId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Stocks_StockId",
+                        column: x => x.StockId,
+                        principalTable: "Stocks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Portfolios",
+                columns: table => new
+                {
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StockId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Portfolios", x => new { x.ApplicationUserId, x.StockId });
+                    table.ForeignKey(
+                        name: "FK_Portfolios_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Portfolios_Stocks_StockId",
+                        column: x => x.StockId,
+                        principalTable: "Stocks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "5178f849-c6ff-446e-b892-82f78ebbb637", null, "User", "USER" },
+                    { "92784455-fa61-4714-aea3-d4d04fb83941", null, "Admin", "ADMIN" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -199,6 +269,16 @@ namespace Stock.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_StockId",
+                table: "Comments",
+                column: "StockId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Portfolios_StockId",
+                table: "Portfolios",
+                column: "StockId");
         }
 
         /// <inheritdoc />
@@ -220,15 +300,19 @@ namespace Stock.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Portfolios");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.RenameColumn(
-                name: "Purchase",
-                table: "Stocks",
-                newName: "Purcase");
+            migrationBuilder.DropTable(
+                name: "Stocks");
         }
     }
 }
