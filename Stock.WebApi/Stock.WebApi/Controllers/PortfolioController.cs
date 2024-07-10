@@ -7,7 +7,6 @@
     using Stock.Services.Interfaces;
     using Stock.WebApi.DtoModels.Stock;
     using Stock.WebApi.Infrastructure.Extensions;
-    using System.Security.Claims;
     using static Common.ApplicationMessages;
 
     [Route("api/[controller]")]
@@ -17,11 +16,16 @@
     {
         private readonly IPortfolioService portfolioService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IStockService stockService;
 
-        public PortfolioController(IPortfolioService portfolioService, UserManager<ApplicationUser> userManager)
+        public PortfolioController(IPortfolioService portfolioService,
+            UserManager<ApplicationUser> userManager,
+            IStockService stockService)
         {
             this.portfolioService = portfolioService;
             this.userManager = userManager;
+            this.stockService = stockService;
+
         }
 
         [HttpGet]
@@ -53,6 +57,41 @@
             }
 
             return this.Ok(stockDtos);
+        }
+
+        [HttpPost]
+        [Route("{id:int}")]
+        public async Task<IActionResult> AddPortfolio([FromRoute] int id)
+        {
+            if (await this.stockService.IsStockExistingByIdAsync(id) == false)
+            {
+                return this.NotFound(StockNotExistingMessage);
+            }
+
+            string username = this.User.GetUsername()!;
+
+            ApplicationUser? user = await this.userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return this.Unauthorized(); 
+            }
+
+            if (await this.portfolioService.IsPortfolioAlreadyAddedAsync(user.Id, id))
+            {
+                return this.BadRequest(PortfolioAlreadyAddedMessage);
+            }
+
+            try
+            {
+                await this.portfolioService.CreatePortfolioAsync(user.Id, id);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest(UnexpectedErrorMessage);
+            }
+
+            return this.Created();
         }
     }
 }

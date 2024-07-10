@@ -16,6 +16,18 @@
             this.repository = repository;
         }
 
+        public async Task CreatePortfolioAsync(string userId, int stockId)
+        {
+            Portfolio portfolio = new Portfolio
+            {
+                ApplicationUserId = userId,
+                StockId = stockId
+            };
+
+            await this.repository.AddAsync<Portfolio>(portfolio);
+            await this.repository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<StockDto>> GetUserPortfolioAsync(string userId)
         {
             IEnumerable<StockDto> stockDtos = await this.repository.AllReadonly<Portfolio>()
@@ -25,6 +37,14 @@
                 .ToListAsync();
 
             return stockDtos;
+        }
+
+        public async Task<bool> IsPortfolioAlreadyAddedAsync(string userId, int stockId)
+        {
+            bool isExisting = await this.repository.AllReadonly<Portfolio>()
+                .AnyAsync(p => p.ApplicationUserId == userId && p.StockId == stockId);
+
+            return isExisting;
         }
     }
 }
