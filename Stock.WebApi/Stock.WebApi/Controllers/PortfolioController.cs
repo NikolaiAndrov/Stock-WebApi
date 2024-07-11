@@ -93,5 +93,29 @@
 
             return this.Created();
         }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeletePortfolio([FromRoute] int id)
+        {
+            if (await this.stockService.IsStockExistingByIdAsync(id) == false)
+            {
+                return this.NotFound();
+            }
+
+            string username = this.User.GetUsername()!;
+            ApplicationUser? applicationUser = await this.userManager.FindByNameAsync(username);
+
+            try
+            {
+                await this.portfolioService.DeletePortfolioAsync(applicationUser!.Id, id);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest(UnexpectedErrorMessage);
+            }
+
+            return this.Ok();
+        }
     }
 }
