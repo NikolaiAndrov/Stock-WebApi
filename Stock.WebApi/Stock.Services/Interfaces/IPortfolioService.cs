@@ -1,6 +1,6 @@
 ﻿namespace Stock.Services.Interfaces
 {
-    using Stock.WebApi.DtoModels.Stock;
+    using WebApi.DtoModels.Stock;
 
     public interface IPortfolioService
     {

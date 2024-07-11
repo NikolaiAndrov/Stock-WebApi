@@ -3,10 +3,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Stock.Data.Models;
-    using Stock.Services.Interfaces;
-    using Stock.WebApi.DtoModels.Stock;
-    using Stock.WebApi.Infrastructure.Extensions;
+    using Data.Models;
+    using Services.Interfaces;
+    using WebApi.DtoModels.Stock;
+    using WebApi.Infrastructure.Extensions;
     using static Common.ApplicationMessages;
 
     [Route("api/[controller]")]

@@ -1,11 +1,11 @@
 ﻿namespace Stock.Services
 {
     using Microsoft.EntityFrameworkCore;
-    using Stock.Data.Common.Repository;
-    using Stock.Data.Models;
-    using Stock.Services.Interfaces;
-    using Stock.WebApi.DtoModels.Stock;
-    using Stock.WebApi.Infrastructure.Extensions;
+    using Data.Common.Repository;
+    using Data.Models;
+    using Services.Interfaces;
+    using WebApi.DtoModels.Stock;
+    using WebApi.Infrastructure.Extensions;
 
     public class PortfolioService : IPortfolioService
     {

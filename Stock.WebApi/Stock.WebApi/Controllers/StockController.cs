@@ -4,7 +4,6 @@
     using Services.Interfaces;
     using DtoModels.Stock;
     using static Common.ApplicationMessages;
-    using Microsoft.AspNetCore.Authorization;
 
     [Route("api/[controller]")]
     [ApiController]
