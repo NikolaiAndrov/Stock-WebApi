@@ -103,8 +103,14 @@
                 return this.NotFound();
             }
 
+
             string username = this.User.GetUsername()!;
             ApplicationUser? applicationUser = await this.userManager.FindByNameAsync(username);
+
+            if (await this.portfolioService.IsPortfolioAlreadyAddedAsync(applicationUser!.Id, id) == false)
+            {
+                return this.NotFound();
+            }
 
             try
             {
