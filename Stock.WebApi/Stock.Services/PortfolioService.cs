@@ -28,6 +28,16 @@
             await this.repository.SaveChangesAsync();
         }
 
+        public async Task DeletePortfolioAsync(string userId, int stockId)
+        {
+            Portfolio? portfolio = await this.repository.All<Portfolio>()
+                .Where(p => p.ApplicationUserId == userId && p.StockId == stockId)
+                .FirstOrDefaultAsync();
+
+            this.repository.Delete<Portfolio>(portfolio!);
+            await this.repository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<StockDto>> GetUserPortfolioAsync(string userId)
         {
             IEnumerable<StockDto> stockDtos = await this.repository.AllReadonly<Portfolio>()

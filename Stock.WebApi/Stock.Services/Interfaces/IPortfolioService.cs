@@ -9,5 +9,7 @@
         Task<bool> IsPortfolioAlreadyAddedAsync(string userId, int stockId);
 
         Task CreatePortfolioAsync(string userId, int stockId);
+
+        Task DeletePortfolioAsync(string userId, int stockId);
     }
 }
