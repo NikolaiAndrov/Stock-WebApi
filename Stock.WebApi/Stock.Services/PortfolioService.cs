@@ -3,9 +3,9 @@
     using Microsoft.EntityFrameworkCore;
     using Data.Common.Repository;
     using Data.Models;
-    using Services.Interfaces;
     using WebApi.DtoModels.Stock;
     using WebApi.Infrastructure.Extensions;
+    using Services.Interfaces;
 
     public class PortfolioService : IPortfolioService
     {
