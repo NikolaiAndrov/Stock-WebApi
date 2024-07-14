@@ -70,7 +70,10 @@
 
         public async Task<CommentDto?> UpdateCommentAsync(int id, UpdateCommentDto updateCommentDto)
         {
-            Comment? comment = await this.repository.GetByIdAsync<Comment>(id);
+            Comment? comment = await this.repository.All<Comment>()
+                .Where(c => c.Id == id)
+                .Include(c => c.User)
+                .FirstAsync();
 
             if(comment == null)
             {
