@@ -143,6 +143,14 @@
                 return this.NotFound();
             }
 
+            string username = this.User.GetUsername()!;
+            ApplicationUser? user = await this.userManager.FindByNameAsync(username);
+
+            if (await this.commentService.IsUserCreatorOfCommentAsync(id, user!.Id) == false)
+            {
+                return this.Unauthorized();
+            }
+
             try
             {
                 await this.commentService.DeleteAsync(id);
