@@ -15,5 +15,7 @@
         Task DeleteAsync(int id);
 
         Task<bool> IsCommentExistingByIdAsync(int id);
+
+        Task<bool> IsUserCreatorOfCommentAsync(int id, string userId);
     }
 }

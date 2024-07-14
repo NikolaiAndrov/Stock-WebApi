@@ -107,6 +107,14 @@
                 return this.BadRequest(this.ModelState);
             }
 
+            string username = this.User.GetUsername()!;
+            ApplicationUser? user = await this.userManager.FindByNameAsync(username);
+
+            if (await this.commentService.IsUserCreatorOfCommentAsync(id, user!.Id) == false)
+            {
+                return this.Unauthorized();
+            }
+
             CommentDto? commentDto;
 
             try

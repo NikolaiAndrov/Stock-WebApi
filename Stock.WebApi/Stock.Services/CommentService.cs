@@ -68,6 +68,14 @@
             return isExisting;
         }
 
+        public async Task<bool> IsUserCreatorOfCommentAsync(int id, string userId)
+        {
+            bool isCreator = await this.repository.AllReadonly<Comment>()
+                .AnyAsync(c => c.Id == id && c.User.Id == userId);
+
+            return isCreator;
+        }
+
         public async Task<CommentDto?> UpdateCommentAsync(int id, UpdateCommentDto updateCommentDto)
         {
             Comment? comment = await this.repository.All<Comment>()
