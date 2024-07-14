@@ -96,6 +96,7 @@
             Stock? stock = await this.repository.AllReadonly<Stock>()
                 .Where(s => s.Id == id)
                 .Include(s => s.Comments)
+                .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync();
 
             if (stock == null)
