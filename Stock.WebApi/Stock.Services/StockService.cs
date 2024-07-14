@@ -119,7 +119,11 @@
 
         public async Task<StockDto?> UpdateAsync(int id, UpdateStockDto updateStockDto)
         {
-            Stock? stock = await this.repository.GetByIdAsync<Stock>(id);
+            Stock? stock = await this.repository.All<Stock>()
+                .Where(s => s.Id == id)
+                .Include(s => s.Comments)
+                .ThenInclude(c => c.User)
+                .FirstAsync();
 
             if(stock == null)
             {
