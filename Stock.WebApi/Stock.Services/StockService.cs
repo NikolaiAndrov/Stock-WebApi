@@ -39,6 +39,7 @@
         {
             IQueryable<Stock> stocksQuery = this.repository.AllReadonly<Stock>()
                 .Include(s => s.Comments)
+                .ThenInclude(s => s.User)
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(stockQueryModel.Symbol))

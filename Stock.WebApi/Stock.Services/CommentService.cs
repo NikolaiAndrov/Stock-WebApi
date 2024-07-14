@@ -38,6 +38,7 @@
         public async Task<IEnumerable<CommentDto>> GetAllAsync()
         {
             IEnumerable<CommentDto> comments = await this.repository.AllReadonly<Comment>()
+                .Include(c => c.User)
                 .Select(c => c.ToCommentDto())
                 .ToListAsync();
 
