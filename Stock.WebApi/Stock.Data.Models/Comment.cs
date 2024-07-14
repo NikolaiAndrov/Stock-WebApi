@@ -29,5 +29,11 @@
 
         [ForeignKey(nameof(StockId))]
         public virtual Stock Stock { get; set; } = null!;
+
+        [Required]
+        public string ApplicationUserId { get; set; } = null!;
+
+        [ForeignKey(nameof(ApplicationUserId))]
+        public virtual ApplicationUser User { get; set; } = null!;
     }
 }
