@@ -19,13 +19,14 @@
             return commentDto;
         }
 
-        public static Comment ToComment(this CreateCommentDto createCommentDto, int stockId)
+        public static Comment ToComment(this CreateCommentDto createCommentDto, int stockId, string userId)
         {
             Comment comment = new Comment
             {
                 Title = createCommentDto.Title,
                 Content = createCommentDto.Content,
-                StockId = stockId
+                StockId = stockId,
+                ApplicationUserId = userId
             };
 
             return comment;

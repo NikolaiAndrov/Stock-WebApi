@@ -8,7 +8,7 @@
 
         Task<CommentDto?> GetByIdAsync(int id);
 
-        Task<CommentDto> CreateCommentAsync(CreateCommentDto createCommentDto, int stockId);
+        Task<CommentDto> CreateCommentAsync(CreateCommentDto createCommentDto, int stockId, string userId);
 
         Task<CommentDto?> UpdateCommentAsync(int id, UpdateCommentDto updateCommentDto);
 

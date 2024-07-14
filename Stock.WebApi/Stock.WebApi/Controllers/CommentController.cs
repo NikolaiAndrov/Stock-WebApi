@@ -1,25 +1,35 @@
 ﻿namespace Stock.WebApi.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
     using Stock.Services.Interfaces;
     using DtoModels.Comment;
     using static Common.ApplicationMessages;
+    using Stock.Data.Models;
+    using Stock.WebApi.Infrastructure.Extensions;
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CommentController : ControllerBase
     {
         private readonly ICommentService commentService;
         private readonly IStockService stockService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public CommentController(ICommentService commentService, IStockService stockService)
+        public CommentController(ICommentService commentService,
+            IStockService stockService,
+            UserManager<ApplicationUser> userManager)
         {
             this.commentService = commentService;
             this.stockService = stockService;
+            this.userManager = userManager;
 
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             IEnumerable<CommentDto> comments;
@@ -37,6 +47,7 @@
         }
 
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             CommentDto? commentDto;
@@ -75,7 +86,9 @@
 
             try
             {
-                commentDto = await this.commentService.CreateCommentAsync(createCommentDto, stockId);
+                string username = this.User.GetUsername()!;
+                ApplicationUser? user = await this.userManager.FindByNameAsync(username);
+                commentDto = await this.commentService.CreateCommentAsync(createCommentDto, stockId, user!.Id);
             }
             catch (Exception)
             {

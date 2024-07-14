@@ -18,9 +18,9 @@
             this.repository = repository;
         }
 
-        public async Task<CommentDto> CreateCommentAsync(CreateCommentDto createCommentDto, int stockId)
+        public async Task<CommentDto> CreateCommentAsync(CreateCommentDto createCommentDto, int stockId, string userId)
         {
-            Comment comment = createCommentDto.ToComment(stockId);
+            Comment comment = createCommentDto.ToComment(stockId, userId);
 
             await this.repository.AddAsync<Comment>(comment);
             await this.repository.SaveChangesAsync();
